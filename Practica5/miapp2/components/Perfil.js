@@ -1,15 +1,26 @@
-import { Text, Button, View } from "react-native"; 
+//Perfil udaando Destructurracion 
+import { Text, View , Button } from "react-native"; 
+import React, { useState } from "react";
 
-export const Perfil = () => {
+export const Perfil = ({nombre, carrera, materia, cuatrimestre}) => {
+    const [mostrar, setMostrar] = useState(false);
+
     return (
+
         <View>
-            <Text>Actividad 3 hacer 4  </Text>
-            <Text>Nombre: Juan Perez</Text>
-            <Text>Carrera: Ingenieria en sistemas computacionales</Text>
-            <Text>Materia: Programacion movil </Text>
-            <Text>Cuatrimestre 9no</Text>
-           
-            
+            <Text> {nombre} </Text>
+
+            {mostrar && //Renderizado condisional 
+            <> 
+
+            <Text> {carrera} </Text>
+            <Text> {materia} </Text>
+            <Text> {cuatrimestre} </Text>
+            </>
+        }
+            <Button tittle = "Ver Perfil" onPress={()=>setMostrar(!mostrar)}/>
+
         </View>
     )
-}
+}   
+

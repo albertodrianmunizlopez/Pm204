@@ -21,7 +21,9 @@ export default function App() {
       <Saludo2 />
 
        <Text> --------------------------</Text>
-        <Perfil />
+       <Perfil nombre="Alberto" carrera="ISC" materia="Programacion Movil" cuatrimestre="9" />
+       
+      <Perfil />
 
       <StatusBar style="auto" />
     </View>
