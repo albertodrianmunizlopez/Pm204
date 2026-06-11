@@ -1,41 +1,80 @@
-/* Zona 1: Importaciones componentes y archivos */
+/* Zona1: Importaciones componentes y archivos*/
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { Saludo } from './components/Saludo';
-import { Saludo2 } from './components/Saludo2';
 import { Perfil } from './components/Perfil';
 
-
-/* Zona 2: Main - Componentes */ 
+/* Zona2: Main - Componentes*/
 export default function App() {
   return (
     <View style={styles.container}>
-      <Image source={require('./assets/wave.png')} style={{ width: 100, height: 100 }} />
-      <Text>Hola mundo RN</Text>
-      <Text> --------------------------</Text>
+      {/* Sección superior */}
+      <View style={styles.arriba}>
+        <Image source={require('./assets/wave.png')} />
+        <Text style={styles.titulo}>Hola Mundo RN</Text>
+      </View>
 
-      <Saludo />
-      <Saludo />
-      <Text> --------------------------</Text>
+      {/* Línea divisoria */}
+      <Text style={styles.linea}>-------------------------------------</Text>
 
-      <Saludo2 />
+      {/* Sección inferior con perfiles en horizontal */}
+      <View style={styles.abajo}>
+        <Perfil
+          style={styles.tarjetaVerde}
+          nombre="Alberto"
+          carrera="ISC"
+          materia="Programación Móvil"
+          cuatri="9no"
+        />
 
-       <Text> --------------------------</Text>
-       <Perfil nombre="Alberto" carrera="ISC" materia="Programacion Movil" cuatrimestre="9" />
-       
-      <Perfil />
+        <Perfil
+          style={styles.tarjetaRoja}
+          nombre="Simón"
+          carrera="Derecho"
+          materia="Lectura"
+          cuatri="8vo"
+        />
+      </View>
 
+      <Text style={styles.conclusion}>Conclusión</Text>
       <StatusBar style="auto" />
     </View>
   );
 }
 
-/* Zona 3: Estilos y Posicionamiento */
+/* Zona3: Estilos y Posicionamientos*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between', // separa arriba y abajo
+    paddingVertical: 40,
+  },
+  arriba: {
+    alignItems: 'center',
+  },
+  titulo: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  linea: {
+    marginVertical: 10,
+  },
+  abajo: {
+    flexDirection: 'space-between', // coloca los perfiles en horizontal
+    justifyContent: 'space-between',
+    alignItems: 'space-between',
+  },
+  tarjetaVerde: {
+    backgroundColor: '#6BCB77',
+  },
+  tarjetaRoja: {
+    backgroundColor: '#FF6B6B',
+  },
+  conclusion: {
+    fontSize: 16,
+    fontStyle: 'italic',
+    marginBottom: 10,
   },
 });
