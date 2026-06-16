@@ -1,0 +1,79 @@
+/* Zona1: Importaciones componentes y archivos*/
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useState } from 'react';
+import TarjetasScreen from './TarjetaScreen';
+import SafeAreaScreen from './SafeAreaScreen';
+import PressableScreen from './PressableScreen';
+import ScrollScreen from './ScrollScreen';
+
+/* Zona2: Main - Componentes*/
+export default function MenuScren() {
+  const [screen, setScreen] = useState('menu');
+
+  switch (screen) {
+    case 'tarjetas':
+      return <TarjetasScreen />;
+    case 'safeArea':
+      return <SafeAreaScreen />;
+    case 'pressable':
+      return <PressableScreen />;
+    case 'ScrollView':
+        return <ScrollScreen/>;
+
+    case 'menu':
+    default:
+      return (
+        <View style={styles.container}>
+          <View style={styles.botonContainer}>
+            <Button
+              title="Practica Tarjetas"
+              color="#4CAF50"
+              onPress={() => setScreen('tarjetas')}
+            />
+          </View>
+
+          <View style={styles.botonContainer}>
+            <Button
+              title="Practica SafeArea"
+              color="#4CAF50"
+              onPress={() => setScreen('safeArea')}
+            />
+          </View>
+
+          <View style={styles.botonContainer}>
+            <Button
+              title="Practica Pressable"
+              color="#4CAF50"
+              onPress={() => setScreen('pressable')}
+            />
+          </View>
+
+          <View style={styles.botonContainer}>
+            <Button
+              title="Practica ScrollView"
+              color="#4CAF50"
+              onPress={() => setScreen('ScrollView')}
+            />
+          </View>
+
+          <StatusBar style="auto" />
+        </View>
+      );
+  }
+}
+
+/* Zona3: Estilos y Posicionamientos*/
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center', // centrado vertical
+    paddingVertical: 40,
+  },
+  botonContainer: {
+    width: 250,        // ancho mayor para el botón
+    marginVertical: 15 // separación entre botones
+  },
+});

@@ -1,17 +1,12 @@
 /* Zona1: Importaciones componentes y archivos*/
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import MenuScren from './screens/MenuScreen';
-
-
+import { StyleSheet, Text, View } from 'react-native';
 
 /* Zona2: Main - Componentes*/
-export default function SafeAreaScree() {
+export default function SafeAreaScreen() {
   return (
     <View style={styles.container}>
-      
-     <MenuScren>  </MenuScren>
-    
+      <Text>Aqui va la practica de SafeAreaView</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -26,6 +21,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between', // separa arriba y abajo
     paddingVertical: 40,
   },
-  
-  
+  arriba: {
+    alignItems: 'center',
+  },
+  titulo: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  linea: {
+    marginVertical: 10,
+  },
+  abajo: {
+    flexDirection: 'row', // coloca los perfiles en horizontal
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 });
