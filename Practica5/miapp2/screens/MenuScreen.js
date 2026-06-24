@@ -7,6 +7,7 @@ import SafeAreaScreen from './SafeAreaScreen';
 import PressableScreen from './PressableScreen';
 import ScrollScreen from './ScrollScreen';
 import SwitchScreen from './SwitchScreen';
+import TextInputAlertScreen from './TextInputAlertScreen';
 
 /* Zona2: Main - Componentes*/
 export default function MenuScren() {
@@ -23,6 +24,8 @@ export default function MenuScren() {
         return <ScrollScreen/>;
     case 'SwitchScreen':
         return <SwitchScreen/>;
+     case 'TextInputAlertScreen':
+        return <TextInputAlertScreen/>;
 
     case 'menu':
     default:
@@ -64,6 +67,14 @@ export default function MenuScren() {
               title="Practica SwitchScreen"
               color="#4CAF50"
               onPress={() => setScreen('SwitchScreen')}
+            />
+          </View>
+
+          <View style={styles.botonContainer}>
+            <Button
+              title="Practica TextInputAlertScreen"
+              color="#4CAF50"
+              onPress={() => setScreen('TextInputAlertScreen')}
             />
           </View>
 
