@@ -1,6 +1,6 @@
 /* Zona1: Importaciones componentes y archivos*/
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import React, { useState } from 'react';
 import TarjetasScreen from './TarjetaScreen';
 import SafeAreaScreen from './SafeAreaScreen';
@@ -8,6 +8,7 @@ import PressableScreen from './PressableScreen';
 import ScrollScreen from './ScrollScreen';
 import SwitchScreen from './SwitchScreen';
 import TextInputAlertScreen from './TextInputAlertScreen';
+import Repaso1Screen from './Repaso1Screen';
 
 /* Zona2: Main - Componentes*/
 export default function MenuScren() {
@@ -21,11 +22,13 @@ export default function MenuScren() {
     case 'pressable':
       return <PressableScreen />;
     case 'ScrollView':
-        return <ScrollScreen/>;
+      return <ScrollScreen />;
     case 'SwitchScreen':
-        return <SwitchScreen/>;
-     case 'TextInputAlertScreen':
-        return <TextInputAlertScreen/>;
+      return <SwitchScreen />;
+    case 'TextInputAlertScreen':
+      return <TextInputAlertScreen />;
+    case 'Repaso1':
+      return <Repaso1Screen />;
 
     case 'menu':
     default:
@@ -75,6 +78,13 @@ export default function MenuScren() {
               title="Practica TextInputAlertScreen"
               color="#4CAF50"
               onPress={() => setScreen('TextInputAlertScreen')}
+            />
+          </View>
+          <View style={styles.botonContainer}>
+            <Button
+              title="Repaso1"
+              color="#4CAF50"
+              onPress={() => setScreen('Repaso1')}
             />
           </View>
 
