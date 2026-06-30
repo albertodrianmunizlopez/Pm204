@@ -9,6 +9,7 @@ import ScrollScreen from './ScrollScreen';
 import SwitchScreen from './SwitchScreen';
 import TextInputAlertScreen from './TextInputAlertScreen';
 import Repaso1Screen from './Repaso1Screen';
+import FlatListScreen from './FlatListScreen';
 
 /* Zona2: Main - Componentes*/
 export default function MenuScren() {
@@ -29,6 +30,8 @@ export default function MenuScren() {
       return <TextInputAlertScreen />;
     case 'Repaso1':
       return <Repaso1Screen />;
+    case 'FlatList':
+      return <FlatListScreen />;
 
     case 'menu':
     default:
@@ -84,7 +87,15 @@ export default function MenuScren() {
             <Button
               title="Repaso1"
               color="#4CAF50"
-              onPress={() => setScreen('Repaso1')}
+              onPress={() => setScreen('FlatList')}
+            />
+          </View>
+
+            <View style={styles.botonContainer}>
+            <Button
+              title="FlatList"
+              color="#4CAF50"
+              onPress={() => setScreen('FlatList')}
             />
           </View>
 
