@@ -6,9 +6,10 @@ import TarjetasScreen from './TarjetaScreen';
 import SafeAreaScreen from './SafeAreaScreen';
 import PressableScreen from './PressableScreen';
 import ScrollScreen from './ScrollScreen';
+import ImageBackgroundScreen from './ImageBackgroundScreen';
 
 /* Zona2: Main - Componentes*/
-export default function MenuScren() {
+export default function MenuScreen() {
   const [screen, setScreen] = useState('menu');
 
   switch (screen) {
@@ -18,8 +19,10 @@ export default function MenuScren() {
       return <SafeAreaScreen />;
     case 'pressable':
       return <PressableScreen />;
-    case 'ScrollView':
-        return <ScrollScreen/>;
+    case 'scrollView':
+      return <ScrollScreen />;
+    case 'imageBackground':
+      return <ImageBackgroundScreen />;
 
     case 'menu':
     default:
@@ -53,7 +56,15 @@ export default function MenuScren() {
             <Button
               title="Practica ScrollView"
               color="#4CAF50"
-              onPress={() => setScreen('ScrollView')}
+              onPress={() => setScreen('scrollView')}
+            />
+          </View>
+
+          <View style={styles.botonContainer}>
+            <Button
+              title="Practica ImageBackground"
+              color="#4CAF50"
+              onPress={() => setScreen('imageBackground')}
             />
           </View>
 
