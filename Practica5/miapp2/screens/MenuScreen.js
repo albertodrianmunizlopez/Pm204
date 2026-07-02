@@ -7,6 +7,7 @@ import SafeAreaScreen from './SafeAreaScreen';
 import PressableScreen from './PressableScreen';
 import ScrollScreen from './ScrollScreen';
 import ImageBackgroundScreen from './ImageBackgroundScreen';
+import ActivityKeyboardScreen from './ActivityKeyboardScreen';
 
 /* Zona2: Main - Componentes*/
 export default function MenuScreen() {
@@ -23,49 +24,35 @@ export default function MenuScreen() {
       return <ScrollScreen />;
     case 'imageBackground':
       return <ImageBackgroundScreen />;
+    case 'activityKeyboard':
+      return <ActivityKeyboardScreen />;
 
     case 'menu':
     default:
       return (
         <View style={styles.container}>
           <View style={styles.botonContainer}>
-            <Button
-              title="Practica Tarjetas"
-              color="#4CAF50"
-              onPress={() => setScreen('tarjetas')}
-            />
+            <Button title="Practica Tarjetas" color="#4CAF50" onPress={() => setScreen('tarjetas')} />
           </View>
 
           <View style={styles.botonContainer}>
-            <Button
-              title="Practica SafeArea"
-              color="#4CAF50"
-              onPress={() => setScreen('safeArea')}
-            />
+            <Button title="Practica SafeArea" color="#4CAF50" onPress={() => setScreen('safeArea')} />
           </View>
 
           <View style={styles.botonContainer}>
-            <Button
-              title="Practica Pressable"
-              color="#4CAF50"
-              onPress={() => setScreen('pressable')}
-            />
+            <Button title="Practica Pressable" color="#4CAF50" onPress={() => setScreen('pressable')} />
           </View>
 
           <View style={styles.botonContainer}>
-            <Button
-              title="Practica ScrollView"
-              color="#4CAF50"
-              onPress={() => setScreen('scrollView')}
-            />
+            <Button title="Practica ScrollView" color="#4CAF50" onPress={() => setScreen('scrollView')} />
           </View>
 
           <View style={styles.botonContainer}>
-            <Button
-              title="Practica ImageBackground"
-              color="#4CAF50"
-              onPress={() => setScreen('imageBackground')}
-            />
+            <Button title="Practica ImageBackground" color="#4CAF50" onPress={() => setScreen('imageBackground')} />
+          </View>
+
+          <View style={styles.botonContainer}>
+            <Button title="Practica ActivityKeyboard" color="#4CAF50" onPress={() => setScreen('activityKeyboard')} />
           </View>
 
           <StatusBar style="auto" />
@@ -80,11 +67,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center', // centrado vertical
+    justifyContent: 'center',
     paddingVertical: 40,
   },
   botonContainer: {
-    width: 250,        // ancho mayor para el botón
-    marginVertical: 15 // separación entre botones
+    width: 250,
+    marginVertical: 15,
   },
 });
