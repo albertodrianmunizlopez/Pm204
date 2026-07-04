@@ -10,8 +10,7 @@ import SwitchScreen from './SwitchScreen';
 import TextInputAlertScreen from './TextInputAlertScreen';
 import Repaso1Screen from './Repaso1Screen';
 import FlatListScreen from './FlatListScreen';
-import EstadisticasScreen from './EstadisticasScreen';
-import UsuariosScreen from './UsuariosScreen';
+import Repaso2Screen from './Repaso2Screen';
 
 /* Zona2: Main - Componentes*/
 export default function MenuScren() {
@@ -38,7 +37,8 @@ export default function MenuScren() {
       return <EstadisticasScreen />;
     case 'UsuariosScreen':
       return <UsuariosScreen />;
-    
+     case 'Repaso2Screen':
+      return <Repaso2Screen />;
     
 
     case 'menu':
@@ -120,6 +120,14 @@ export default function MenuScren() {
               title="Usuarios"
               color="#4CAF50"
               onPress={() => setScreen('UsuariosScreen')}
+            />
+          </View>
+
+          <View style={styles.botonContainer}>
+            <Button
+              title="Repaso2"
+              color="#4CAF50"
+              onPress={() => setScreen('Repaso2Screen')}
             />
           </View>
 
