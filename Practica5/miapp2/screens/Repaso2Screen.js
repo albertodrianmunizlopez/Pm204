@@ -4,7 +4,7 @@ import {
   Alert, ActivityIndicator, ImageBackground, StyleSheet 
 } from 'react-native';
 
-export default function App() {
+export default function Repaso2Screen() {
   const [loadingSplash, setLoadingSplash] = useState(true);
   const [titulo, setTitulo] = useState('');
   const [autor, setAutor] = useState('');
@@ -93,7 +93,7 @@ export default function App() {
   );
 }
 
-/* 🎨 Estilos */
+/*  Estilos */
 const styles = StyleSheet.create({
   splash: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#111' },
   splashText: { fontSize: 28, color: '#fff', fontWeight: 'bold' },

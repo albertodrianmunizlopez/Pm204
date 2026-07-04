@@ -21,7 +21,9 @@ export default function Repaso1Screen() {
 
     Alert.alert(
       'Registro',
-      `Nombre: ${nombre}\nCarrera: ${carrera}\nSemestre: ${semestre}\nTaller: ${taller ? 'Sí' : 'No'}\nConstancia: ${constancia ? 'Sí' : 'No'}\nDeportes: ${deportes ? 'Sí' : 'No'}`
+      `Nombre: ${nombre}\nCarrera: ${carrera}\nSemestre: 
+      ${semestre}\nTaller: ${taller ? 'Sí' : 'No'}\nConstancia: ${constancia ? 'Sí' : 'No'}
+      \nDeportes: ${deportes ? 'Sí' : 'No'}`
     );
   };
 
