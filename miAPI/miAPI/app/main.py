@@ -15,3 +15,6 @@ app = FastAPI(
 )
 
 app.include_router(usuarios.router)
+
+
+app.include_router(usuarios.router)
