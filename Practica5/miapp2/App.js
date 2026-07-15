@@ -1,31 +1,23 @@
-/* Zona1: Importaciones componentes y archivos*/
+// App.js
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import MenuScren from './screens/MenuScreen';
+import { StyleSheet, View } from 'react-native';
+import MenuScreen from './screens/MenuScreen'; // ojo: nombre correcto "Screen"
 
-
-
-/* Zona2: Main - Componentes*/
-export default function SafeAreaScree() {
+export default function App() {
   return (
     <View style={styles.container}>
-      
-     <MenuScren>  </MenuScren>
-    
+      <MenuScreen />
       <StatusBar style="auto" />
     </View>
   );
 }
 
-/* Zona3: Estilos y Posicionamientos*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'space-between', // separa arriba y abajo
+    justifyContent: 'space-between',
     paddingVertical: 40,
   },
-  
-  
 });
