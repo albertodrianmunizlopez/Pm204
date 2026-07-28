@@ -5,7 +5,7 @@ import {View,SafeAreaView,Text,TextInput,Pressable,StyleSheet,Alert, Platform} f
 export default function App() {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
-  const [cargando, sertCargando]= useState(false);
+  const [cargando, setCargando]= useState(false);
 
   const mostrarMensaje = (titulo, mensaje)=>{
     if(Platform.OS === 'web'){
