@@ -45,6 +45,15 @@ export default function App() {
   }
 };
 
+const eliminarUsuario = async (id) => {
+
+}
+
+const actualizarUsuario = async (id) => {
+
+
+}
+
   return (
     <SafeAreaView style={styles.container}>
 
