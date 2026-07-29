@@ -1,67 +1,70 @@
 import React, { useState } from 'react';
-import {View,SafeAreaView,Text,TextInput,Pressable,StyleSheet,Alert, Platform} from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  Alert,
+  Platform,
+} from 'react-native';
 
-
-export default function App() {
+export default function AltaUsuarioScreen() {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
-  const [cargando, setCargando]= useState(false);
+  const [cargando, setCargando] = useState(false);
 
-  const mostrarMensaje = (titulo, mensaje)=>{
-    if(Platform.OS === 'web'){
+  const mostrarMensaje = (titulo, mensaje) => {
+    if (Platform.OS === 'web') {
       window.alert(`${titulo}\n\n${mensaje}`);
-  }else{
-    Alert.alert(titulo, mensaje);
-  }
-}
+    } else {
+      Alert.alert(titulo, mensaje);
+    }
+  };
 
   const guardarUsuario = async () => {
-    if (nombre.trim() === '' || edad.trim() === ''){
-      mostrarMensaje('Vacios', 'Completa edad y nombre en el formulario');
+    if (nombre.trim() === '' || edad.trim() === '') {
+      mostrarMensaje('Error', 'Completa edad y nombre en el formulario');
       return;
     }
 
-    try{
-     const respuesta = await fetch('http://192.168.1.93:5000/v1/usuarios/',
-      {
-        method: "POST" ,
-        headers: {"Content-Type": "application/json",},
-        body: JSON.stringify({nombre:nombre, edad:Number(edad)})
+    setCargando(true);
+
+    try {
+      const respuesta = await fetch('http://192.168.1.93:5000/v1/usuarios/', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Basic " + btoa("admin:1234"), // igual que en actualizar/eliminar
+        },
+        body: JSON.stringify({
+          nombre: nombre,
+          edad: Number(edad),
+        }),
       });
-    const datos = await respuesta.json();
-    console.log(datos); 
-    mostrarMensaje(" Exito ", "Usuario Registrado");
 
-    setNombre('');
-    setEdad('');
+      const datos = await respuesta.json();
+      console.log(datos);
 
-  } catch (error) {
-    mostrarMensaje("Error", "No fue posible guardar");
-    console.log(error);
+      mostrarMensaje("Éxito", "Usuario registrado correctamente");
 
-  }
-  finally{
-    setCargando(false);
-  }
-};
+      // Limpia los campos
+      setNombre('');
+      setEdad('');
 
-const eliminarUsuario = async (id) => {
-
-}
-
-const actualizarUsuario = async (id) => {
-
-
-}
+    } catch (error) {
+      console.log(error);
+      mostrarMensaje("Error", "No fue posible guardar el usuario");
+    } finally {
+      setCargando(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-
       <View style={styles.card}>
-
-        <Text style={styles.titulo}>
-          Registro de Usuarios
-        </Text>
+        <Text style={styles.titulo}>Registro de Usuarios</Text>
 
         <TextInput
           style={styles.input}
@@ -78,20 +81,21 @@ const actualizarUsuario = async (id) => {
           onChangeText={setEdad}
         />
 
-        <Pressable style={styles.boton} onPress={guardarUsuario} disabled={cargando}>
+        <Pressable
+          style={styles.boton}
+          onPress={guardarUsuario}
+          disabled={cargando}
+        >
           <Text style={styles.textoBoton}>
-            {cargando? "Guardando...":"Agregar Usuario"}
+            {cargando ? "Guardando..." : "Agregar Usuario"}
           </Text>
         </Pressable>
-
       </View>
-
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: '#F5F7FA',
@@ -99,22 +103,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
-
   card: {
     width: '100%',
     backgroundColor: '#FFFFFF',
     padding: 25,
     borderRadius: 15,
-    elevation: 5, 
+    elevation: 5,
     shadowColor: '#000',
     shadowOpacity: 0.15,
     shadowRadius: 8,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
+    shadowOffset: { width: 0, height: 3 },
   },
-
   titulo: {
     fontSize: 26,
     fontWeight: 'bold',
@@ -122,7 +121,6 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     color: '#1F2937',
   },
-
   input: {
     height: 50,
     borderWidth: 1,
@@ -133,7 +131,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9FAFB',
     fontSize: 16,
   },
-
   boton: {
     backgroundColor: '#29bb0c',
     paddingVertical: 15,
@@ -141,11 +138,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
-
   textoBoton: {
     color: '#FFFFFF',
     fontSize: 17,
     fontWeight: 'bold',
   },
-
 });

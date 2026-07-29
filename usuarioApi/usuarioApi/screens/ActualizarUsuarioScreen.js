@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocalSearchParams, router } from "expo-router";
 import {
   SafeAreaView,
   View,
@@ -10,14 +11,15 @@ import {
   Platform,
 } from 'react-native';
 
-export default function ActualizarUsuarioScreen({ route, navigation }) {
+export default function ActualizarUsuarioScreen() {
 
   // Usuario recibido desde la pantalla Detalle
-  const { usuario } = route.params;
+  const { usuario } = useLocalSearchParams();
+  const datos = JSON.parse(usuario);
 
   // Datos precargados
-  const [nombre, setNombre] = useState(usuario.nombre);
-  const [edad, setEdad] = useState(usuario.edad.toString());
+  const [nombre, setNombre] = useState(datos.nombre);
+  const [edad, setEdad] = useState(datos.edad.toString());
   const [cargando, setCargando] = useState(false);
 
   const mostrarMensaje = (titulo, mensaje) => {
@@ -29,7 +31,6 @@ export default function ActualizarUsuarioScreen({ route, navigation }) {
   };
 
   const actualizarUsuario = async () => {
-
     if (nombre.trim() === '' || edad.trim() === '') {
       mostrarMensaje("Error", "Completa todos los campos");
       return;
@@ -38,13 +39,13 @@ export default function ActualizarUsuarioScreen({ route, navigation }) {
     setCargando(true);
 
     try {
-
       const respuesta = await fetch(
-        `http://192.168.1.93:5000/v1/usuarios/${usuario.id}`,
+        `http://192.168.1.93:5000/v1/usuarios/${datos.id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": "Basic " + btoa("admin:1234"),
           },
           body: JSON.stringify({
             nombre: nombre,
@@ -53,58 +54,35 @@ export default function ActualizarUsuarioScreen({ route, navigation }) {
         }
       );
 
-      const datos = await respuesta.json();
+      const resultado = await respuesta.json();
+      console.log(resultado);
 
-      console.log(datos);
+      mostrarMensaje("Éxito", "Usuario actualizado correctamente");
 
-      mostrarMensaje(
-        "Éxito",
-        "Usuario actualizado correctamente"
-      );
-
-      navigation.goBack();
+      // Regresa a la pantalla anterior
+      router.back();
 
     } catch (error) {
-
       console.log(error);
-
-      mostrarMensaje(
-        "Error",
-        "No fue posible actualizar el usuario"
-      );
-
+      mostrarMensaje("Error", "No fue posible actualizar el usuario");
     } finally {
-
       setCargando(false);
-
     }
-
   };
 
   return (
-
     <SafeAreaView style={styles.container}>
-
       <View style={styles.card}>
+        <Text style={styles.titulo}>Actualizar Usuario</Text>
 
-        <Text style={styles.titulo}>
-          Actualizar Usuario
-        </Text>
-
-        <Text style={styles.label}>
-          Nombre
-        </Text>
-
+        <Text style={styles.label}>Nombre</Text>
         <TextInput
           style={styles.input}
           value={nombre}
           onChangeText={setNombre}
         />
 
-        <Text style={styles.label}>
-          Edad
-        </Text>
-
+        <Text style={styles.label}>Edad</Text>
         <TextInput
           style={styles.input}
           keyboardType="numeric"
@@ -121,44 +99,35 @@ export default function ActualizarUsuarioScreen({ route, navigation }) {
             {cargando ? "Guardando..." : "Guardar cambios"}
           </Text>
         </Pressable>
-
       </View>
-
     </SafeAreaView>
-
   );
-
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: '#F5F7FA',
     justifyContent: 'center',
     padding: 20,
   },
-
   card: {
     backgroundColor: '#FFFFFF',
     padding: 20,
     borderRadius: 15,
     elevation: 5,
   },
-
   titulo: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
   },
-
   label: {
     fontWeight: 'bold',
     marginBottom: 5,
     marginTop: 10,
   },
-
   input: {
     borderWidth: 1,
     borderColor: '#CCC',
@@ -167,7 +136,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#FFF',
   },
-
   boton: {
     backgroundColor: '#FFC107',
     padding: 14,
@@ -175,11 +143,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 15,
   },
-
   textoBoton: {
     fontWeight: 'bold',
     color: '#000',
     fontSize: 16,
   },
-
 });

@@ -1,5 +1,6 @@
-import ConsultaUsuarioScreen from "../../screens/ConsultaUsuariosScreen";
+// app/(tabs)/consulta.js
+import ConsultaUsuariosScreen from "../../screens/ConsultaUsuariosScreen";
 
-export default function consulta() {
-    return <ConsultaUsuarioScreen />;
+export default function Consulta() {
+  return <ConsultaUsuariosScreen />;
 }
