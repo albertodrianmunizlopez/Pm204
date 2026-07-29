@@ -1,5 +1,6 @@
 import {SafeAreaView,View,Text,FlatList,StyleSheet,} from 'react-native';
 import React, {useState, useEffect} from 'react';
+import { Pressable } from "react-native";
 
 export default function ConsultaUsuariosScreen() {
 
@@ -22,17 +23,37 @@ export default function ConsultaUsuariosScreen() {
 
 
   const renderTarjeta = ({ item }) => (
-    <View style={styles.card}>
+      <View style={styles.card}>
 
-      <Text style={styles.nombre}>{item.nombre}</Text>
+<Text style={styles.nombre}>
+    {item.nombre}
+</Text>
 
-      <View style={styles.linea}></View>
+<Text style={styles.info}>
+Edad: {item.edad}
+</Text>
 
-      <Text style={styles.info}>
-        Edad: {item.edad} años
-      </Text>
+<Pressable
 
-    </View>
+style={styles.boton}
+
+onPress={()=>
+
+navigation.navigate("Detalle",{
+usuario:item
+})
+
+}
+
+>
+
+<Text style={styles.textoBoton}>
+Ver detalle
+</Text>
+
+</Pressable>
+
+</View>
   );
 
   return (
