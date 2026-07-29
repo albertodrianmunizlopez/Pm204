@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { router } from "expo-router";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   SafeAreaView,
   View,
@@ -7,18 +8,16 @@ import {
   FlatList,
   StyleSheet,
   Pressable,
-} from 'react-native';
+} from "react-native";
 
 export default function ConsultaUsuariosScreen() {
   const [usuarios, setUsuarios] = useState([]);
 
   const obtenerUsuarios = async () => {
     try {
-      const respuesta = await fetch('http://192.168.1.93:5000/v1/usuarios/');
+      const respuesta = await fetch("http://192.168.1.93:5000/v1/usuarios/");
       const datos = await respuesta.json();
-
       console.log("Respuesta del API:", datos);
-
       setUsuarios(datos.usuarios);
     } catch (error) {
       console.log("Error de API:", error);
@@ -29,22 +28,25 @@ export default function ConsultaUsuariosScreen() {
     obtenerUsuarios();
   }, []);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("Pantalla Consulta enfocada, refrescando usuarios...");
+      obtenerUsuarios();
+    }, [])
+  );
+
   const renderTarjeta = ({ item }) => (
     <View style={styles.card}>
       <Text style={styles.nombre}>{item.nombre}</Text>
-
       <View style={styles.linea} />
-
       <Text style={styles.info}>Edad: {item.edad} años</Text>
 
       <Pressable
         style={styles.boton}
         onPress={() =>
           router.push({
-            pathname: "/detalle", // 👈 en minúsculas
-            params: {
-              usuario: JSON.stringify(item),
-            },
+            pathname: "/detalle",
+            params: { usuario: JSON.stringify(item) },
           })
         }
       >
@@ -56,7 +58,6 @@ export default function ConsultaUsuariosScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titulo}>Lista de Usuarios</Text>
-
       <FlatList
         data={usuarios}
         keyExtractor={(item) => item.id.toString()}
@@ -69,53 +70,33 @@ export default function ConsultaUsuariosScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F7FA',
-    padding: 20,
-  },
+  container: { flex: 1, backgroundColor: "#F5F7FA", padding: 20 },
   titulo: {
     fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#1F2937',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#1F2937",
     marginBottom: 20,
   },
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderRadius: 15,
     padding: 18,
     marginBottom: 15,
     elevation: 4,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.15,
     shadowRadius: 5,
     shadowOffset: { width: 0, height: 3 },
   },
-  nombre: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#2563EB',
-  },
-  linea: {
-    height: 1,
-    backgroundColor: '#E5E7EB',
-    marginVertical: 10,
-  },
-  info: {
-    fontSize: 16,
-    color: '#4B5563',
-    marginBottom: 15,
-  },
+  nombre: { fontSize: 20, fontWeight: "bold", color: "#2563EB" },
+  linea: { height: 1, backgroundColor: "#E5E7EB", marginVertical: 10 },
+  info: { fontSize: 16, color: "#4B5563", marginBottom: 15 },
   boton: {
-    backgroundColor: '#FFC107',
+    backgroundColor: "#FFC107",
     paddingVertical: 12,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
-  textoBoton: {
-    color: '#000',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+  textoBoton: { color: "#000", fontSize: 16, fontWeight: "bold" },
 });

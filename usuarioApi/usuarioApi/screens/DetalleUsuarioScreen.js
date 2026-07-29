@@ -1,7 +1,5 @@
 import React from "react";
 import { useLocalSearchParams, router } from "expo-router";
-
-
 import {
   View,
   Text,
@@ -24,6 +22,7 @@ export default function DetalleUsuarioScreen() {
   };
 
   const eliminarUsuario = async (id) => {
+    console.log("Intentando eliminar usuario con id:", id);
     try {
       const respuesta = await fetch(
         `http://192.168.1.93:5000/v1/usuarios/${id}`,
@@ -36,14 +35,16 @@ export default function DetalleUsuarioScreen() {
         }
       );
 
+      console.log("Respuesta DELETE:", respuesta.status);
+
       if (respuesta.ok) {
         mostrarMensaje("Éxito", "Usuario eliminado correctamente");
-        router.back(); // Regresa a la lista
+        router.back(); // regresa a la lista
       } else {
         mostrarMensaje("Error", "No fue posible eliminar el usuario");
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error en eliminarUsuario:", error);
       mostrarMensaje("Error", "Ocurrió un problema al eliminar");
     }
   };
@@ -63,9 +64,7 @@ export default function DetalleUsuarioScreen() {
         onPress={() =>
           router.push({
             pathname: "/actualizar",
-            params: {
-              usuario: JSON.stringify(datos),
-            },
+            params: { usuario: JSON.stringify(datos) },
           })
         }
       >
@@ -83,7 +82,7 @@ export default function DetalleUsuarioScreen() {
               {
                 text: "Sí, eliminar",
                 style: "destructive",
-                onPress: () => eliminarUsuario(datos.id),
+                onPress: () => eliminarUsuario(Number(datos.id)),
               },
             ]
           );
@@ -96,11 +95,7 @@ export default function DetalleUsuarioScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F5F7FA",
-    padding: 20,
-  },
+  container: { flex: 1, backgroundColor: "#F5F7FA", padding: 20 },
   titulo: {
     fontSize: 28,
     fontWeight: "bold",
@@ -108,17 +103,8 @@ const styles = StyleSheet.create({
     color: "#1F2937",
     marginBottom: 20,
   },
-  label: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#374151",
-    marginTop: 10,
-  },
-  valor: {
-    fontSize: 16,
-    color: "#4B5563",
-    marginBottom: 10,
-  },
+  label: { fontSize: 18, fontWeight: "600", color: "#374151", marginTop: 10 },
+  valor: { fontSize: 16, color: "#4B5563", marginBottom: 10 },
   actualizar: {
     backgroundColor: "#2563EB",
     paddingVertical: 12,
@@ -133,9 +119,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10,
   },
-  textoBoton: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
+  textoBoton: { color: "#fff", fontSize: 16, fontWeight: "bold" },
 });
