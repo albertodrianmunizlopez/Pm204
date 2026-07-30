@@ -25,7 +25,7 @@ export default function DetalleUsuarioScreen() {
     console.log("Intentando eliminar usuario con id:", id);
     try {
       const respuesta = await fetch(
-        `http://192.168.1.93:5000/v1/usuarios/${id}`,
+        `http://10.177.95.50:5000/v1/usuarios/${id}`,
         {
           method: "DELETE",
           headers: {

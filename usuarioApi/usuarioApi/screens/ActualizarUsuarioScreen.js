@@ -40,7 +40,7 @@ export default function ActualizarUsuarioScreen() {
 
     try {
       const respuesta = await fetch(
-        `http://192.168.1.93:5000/v1/usuarios/${datos.id}`,
+        `http://10.177.95.50:5000/v1/usuarios/${datos.id}`,
         {
           method: "PUT",
           headers: {

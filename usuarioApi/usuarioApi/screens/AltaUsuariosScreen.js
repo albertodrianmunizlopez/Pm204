@@ -32,7 +32,7 @@ export default function AltaUsuarioScreen() {
     setCargando(true);
 
     try {
-      const respuesta = await fetch('http://192.168.1.93:5000/v1/usuarios/', {
+      const respuesta = await fetch('http://10.177.95.50:5000/v1/usuarios/', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
