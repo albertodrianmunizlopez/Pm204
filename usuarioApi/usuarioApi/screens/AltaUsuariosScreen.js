@@ -9,6 +9,7 @@ import {
   Alert,
   Platform,
 } from 'react-native';
+import { router } from "expo-router"; // <-- agregado
 
 export default function AltaUsuarioScreen() {
   const [nombre, setNombre] = useState('');
@@ -32,11 +33,11 @@ export default function AltaUsuarioScreen() {
     setCargando(true);
 
     try {
-      const respuesta = await fetch('http://10.177.95.50:5000/v1/usuarios/', {
+      const respuesta = await fetch('http://192.168.1.93:5000/v1/usuarios/', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Basic " + btoa("admin:1234"), // igual que en actualizar/eliminar
+          "Authorization": "Basic " + btoa("admin:1234"),
         },
         body: JSON.stringify({
           nombre: nombre,
@@ -49,7 +50,6 @@ export default function AltaUsuarioScreen() {
 
       mostrarMensaje("Éxito", "Usuario registrado correctamente");
 
-      // Limpia los campos
       setNombre('');
       setEdad('');
 
@@ -63,6 +63,13 @@ export default function AltaUsuarioScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitulo}>Registro</Text>
+        <Pressable onPress={() => router.push("/consulta")}>
+          <Text style={styles.headerBoton}>Consulta ➜</Text>
+        </Pressable>
+      </View>
+
       <View style={styles.card}>
         <Text style={styles.titulo}>Registro de Usuarios</Text>
 
@@ -102,6 +109,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+  },
+  header: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginBottom: 10,
+  },
+  headerTitulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#1F2937',
+  },
+  headerBoton: {
+    color: '#2563EB',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   card: {
     width: '100%',

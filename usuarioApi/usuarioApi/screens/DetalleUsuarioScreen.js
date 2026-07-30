@@ -25,7 +25,7 @@ export default function DetalleUsuarioScreen() {
     console.log("Intentando eliminar usuario con id:", id);
     try {
       const respuesta = await fetch(
-        `http://10.177.95.50:5000/v1/usuarios/${id}`,
+        `http://192.168.1.93:5000/v1/usuarios/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -39,7 +39,7 @@ export default function DetalleUsuarioScreen() {
 
       if (respuesta.ok) {
         mostrarMensaje("Éxito", "Usuario eliminado correctamente");
-        router.back(); // regresa a la lista
+        router.push("/consulta"); // <-- cambiado de router.back()
       } else {
         mostrarMensaje("Error", "No fue posible eliminar el usuario");
       }
@@ -51,6 +51,10 @@ export default function DetalleUsuarioScreen() {
 
   return (
     <View style={styles.container}>
+      <Pressable style={styles.regresar} onPress={() => router.push("/consulta")}>
+        <Text style={styles.textoRegresar}>‹ Consulta</Text>
+      </Pressable>
+
       <Text style={styles.titulo}>Detalles del Usuario</Text>
 
       <Text style={styles.label}>Nombre</Text>
@@ -96,6 +100,14 @@ export default function DetalleUsuarioScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#F5F7FA", padding: 20 },
+  regresar: {
+    marginBottom: 10,
+  },
+  textoRegresar: {
+    color: '#2563EB',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   titulo: {
     fontSize: 28,
     fontWeight: "bold",

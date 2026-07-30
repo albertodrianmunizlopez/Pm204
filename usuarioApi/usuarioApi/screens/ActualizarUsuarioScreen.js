@@ -13,11 +13,9 @@ import {
 
 export default function ActualizarUsuarioScreen() {
 
-  // Usuario recibido desde la pantalla Detalle
   const { usuario } = useLocalSearchParams();
   const datos = JSON.parse(usuario);
 
-  // Datos precargados
   const [nombre, setNombre] = useState(datos.nombre);
   const [edad, setEdad] = useState(datos.edad.toString());
   const [cargando, setCargando] = useState(false);
@@ -40,7 +38,7 @@ export default function ActualizarUsuarioScreen() {
 
     try {
       const respuesta = await fetch(
-        `http://10.177.95.50:5000/v1/usuarios/${datos.id}`,
+        `http://192.168.1.93:5000/v1/usuarios/${datos.id}`,
         {
           method: "PUT",
           headers: {
@@ -59,8 +57,7 @@ export default function ActualizarUsuarioScreen() {
 
       mostrarMensaje("Éxito", "Usuario actualizado correctamente");
 
-      // Regresa a la pantalla anterior
-      router.back();
+      router.push("/consulta"); // <-- cambiado de router.back()
 
     } catch (error) {
       console.log(error);
@@ -72,6 +69,10 @@ export default function ActualizarUsuarioScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Pressable style={styles.regresar} onPress={() => router.back()}>
+        <Text style={styles.textoRegresar}>‹ Regresar</Text>
+      </Pressable>
+
       <View style={styles.card}>
         <Text style={styles.titulo}>Actualizar Usuario</Text>
 
@@ -110,6 +111,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F7FA',
     justifyContent: 'center',
     padding: 20,
+  },
+  regresar: {
+    marginBottom: 10,
+  },
+  textoRegresar: {
+    color: '#2563EB',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   card: {
     backgroundColor: '#FFFFFF',
